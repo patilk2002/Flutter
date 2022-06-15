@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'pages/homepage.dart';
 import 'pages/loginpage.dart';
@@ -15,9 +16,13 @@ class Todo extends StatelessWidget {
     return MaterialApp(
       // home: LoginPage(),
       themeMode: ThemeMode.dark,
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+          fontFamily: GoogleFonts.lato().fontFamily,
+          primaryTextTheme: GoogleFonts.latoTextTheme()),
       //`darkTheme: ThemeData(brightness: Brightness.dark),
-      initialRoute: "/home",
+
+      initialRoute: "/",
       routes: {
         "/": (context) => LoginPage(),
         "/home": (context) => HomePage(),
