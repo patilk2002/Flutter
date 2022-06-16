@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo/utils/routes.dart';
 
 import 'pages/homepage.dart';
 import 'pages/loginpage.dart';
@@ -20,13 +21,14 @@ class Todo extends StatelessWidget {
           primarySwatch: Colors.deepPurple,
           fontFamily: GoogleFonts.lato().fontFamily,
           primaryTextTheme: GoogleFonts.latoTextTheme()),
+      debugShowCheckedModeBanner: false,
       //`darkTheme: ThemeData(brightness: Brightness.dark),
 
       initialRoute: "/",
       routes: {
         "/": (context) => LoginPage(),
-        "/home": (context) => HomePage(),
-        "/login": (context) => LoginPage()
+        MyRoutes.HomeRoute: (context) => HomePage(),
+        MyRoutes.LoginRoute: (context) => LoginPage()
       },
     );
   }
