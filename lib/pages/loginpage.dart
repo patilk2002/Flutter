@@ -10,6 +10,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String name = "";
+  bool changeButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,25 +60,37 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      setState(() {
+                        changeButton = true;
+                      });
+
+                      await Future.delayed(const Duration(seconds: 1));
                       Navigator.pushNamed(context, MyRoutes.HomeRoute);
                     },
-                    child: Container(
-                      width: 150,
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      width: changeButton ? 50 : 150,
                       height: 40,
                       color: Colors.deepPurple,
                       alignment: Alignment.center,
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 10,
-                        ),
-                      ),
+                      child: changeButton
+                          ? const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10,
+                              ),
+                            ),
                       decoration: BoxDecoration(
                         color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius:
+                            BorderRadius.circular(changeButton ? 50 : 10),
                       ),
                     ),
                   ),
