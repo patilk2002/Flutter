@@ -14,16 +14,18 @@ class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) async {
-    setState(() {
-      changeButton = true;
-    });
+    if (_formkey.currentState!.validate()) {
+      setState(() {
+        changeButton = true;
+      });
 
-    await Future.delayed(const Duration(seconds: 1));
-    await Navigator.pushNamed(context, MyRoutes.HomeRoute);
+      await Future.delayed(const Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.HomeRoute);
 
-    setState(() {
-      changeButton = false;
-    });
+      setState(() {
+        changeButton = false;
+      });
+    }
   }
 
   @override
@@ -32,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       color: Colors.white,
       child: SingleChildScrollView(
         child: Form(
+          key: _formkey,
           child: Column(
             children: [
               Image.asset(
@@ -59,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "username",
                       ),
                       validator: (value) {
-                        if (value == null) {
+                        if (value!.isEmpty) {
                           return "Username cannot be empty";
                         }
                         return null;
@@ -76,11 +79,9 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "password",
                       ),
                       validator: (value) {
-                        if (value == null) {
+                        if (value!.isEmpty) {
                           return "Password cannot be empty";
-                        }
-
-                        if (value.length < 6) {
+                        } else if (value.length < 6) {
                           return "Password length should atleast 6";
                         }
 
