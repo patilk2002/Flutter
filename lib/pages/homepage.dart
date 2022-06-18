@@ -14,7 +14,10 @@ class HomePage extends StatelessWidget {
     const pi = 3.14;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kiran Patil"),
+        title: Text(
+          "Kiran Patil",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Center(
         child: Container(
