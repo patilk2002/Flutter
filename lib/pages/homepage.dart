@@ -1,37 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todo/models/catalog.dart';
-
 import '../widgets/drawer.dart';
 import '../widgets/item_widget.dart';
+import 'dart:convert';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     int days = 30;
-    double d = 24;
     final String Name = 'kiran';
-    bool c = true;
-    num n = 35.5;
-    var day = "Tuesday";
-    const pi = 3.14;
-    final dummyList = List.generate(25, (index) => CatalogModel.items[0]);
+
+    @override
+    loadData() async {
+      await Future.delayed(Duration(seconds: 1));
+      final catalogJson =
+          await rootBundle.loadString("assets/files/catalog.json");
+      final decodedData = jsonDecode(catalogJson);
+      var productsData = decodedData["products"];
+      CatalogModel.items = List.from(productsData)
+          .map<Item>((item) => Item.fromMap(item))
+          .toList();
+      setState(() {});
+    }
+
+    void initState() {
+      super.initState();
+      loadData();
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Kiran Patil",
+          "Catalog App",
           style: TextStyle(color: Colors.black),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-            itemCount: dummyList.length,
-            itemBuilder: (context, index) {
-              return ItemWidget(
-                item: dummyList[index],
-              );
-            }),
+        child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
+            ? ListView.builder(
+                itemCount: CatalogModel.items!.length,
+                itemBuilder: (context, index) => ItemWidget(
+                  item: CatalogModel.items![index],
+                ),
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: MyDrawer(),
     );
