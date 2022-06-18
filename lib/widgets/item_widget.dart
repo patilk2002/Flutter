@@ -10,7 +10,10 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dummyList = List.generate(10, (index) => CatalogModel.items[0]);
     return Card(
+      color: Color.fromARGB(255, 226, 224, 224),
+      shape: StadiumBorder(),
       child: ListTile(
         onTap: () {
           print("${item.name} pressed");
