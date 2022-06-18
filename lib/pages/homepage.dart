@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
           .map<Item>((item) => Item.fromMap(item))
           .toList();
       setState(() {});
+      print(productsData);
     }
 
     void initState() {
