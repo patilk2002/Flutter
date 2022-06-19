@@ -4,7 +4,6 @@ class CartModel {
   // catalog field
   late CatalogModel _catalog;
 
-  // Collection of IDs - store Ids of each item
   final List<int> _itemIds = [];
 
   // Get Catalog
