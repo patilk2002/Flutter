@@ -1,6 +1,7 @@
 // @dart=2.9";
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo/pages/cart_page.dart';
 import 'package:todo/utils/routes.dart';
 import 'package:todo/widgets/themes.dart';
 import 'widgets/themes.dart';
@@ -26,7 +27,9 @@ class Todo extends StatelessWidget {
       routes: {
         "/": (context) => LoginPage(),
         MyRoutes.HomeRoute: (context) => HomePage(),
-        MyRoutes.LoginRoute: (context) => LoginPage()
+        MyRoutes.LoginRoute: (context) => LoginPage(),
+        MyRoutes.cartRoute: (context) => CartPage(),
+
       },
     );
   }
