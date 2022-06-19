@@ -18,18 +18,16 @@ class Todo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: LoginPage(),
-      themeMode: ThemeMode.dark,
-      theme: MyTheme.lightTheme,
+      themeMode: ThemeMode.system,
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      //`darkTheme: ThemeData(brightness: Brightness.dark),
       initialRoute: MyRoutes.HomeRoute,
       routes: {
         "/": (context) => LoginPage(),
         MyRoutes.HomeRoute: (context) => HomePage(),
         MyRoutes.LoginRoute: (context) => LoginPage(),
         MyRoutes.cartRoute: (context) => CartPage(),
-
       },
     );
   }
