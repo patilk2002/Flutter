@@ -21,7 +21,7 @@ class CatalogList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeDetailpage(catalog: catalog),
+              builder: (context) => HomeDetailPage(catalog: catalog),
             ),
           ),
           child: CatalogItem(catalog: catalog),
@@ -47,7 +47,7 @@ class CatalogItem extends StatelessWidget {
             tag: Key(catalog.id.toString()),
             child: CatalogImage(
               image: catalog.image,
-              key: Key('value'),
+              key: Key(''),
             ),
           ),
           Expanded(

@@ -3,35 +3,29 @@ import 'package:todo/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../models/catalog.dart';
+import '../widgets/home_widgets/add_to_cart.dart';
 
-class HomeDetailpage extends StatelessWidget {
+class HomeDetailPage extends StatelessWidget {
   final Item catalog;
-  const HomeDetailpage({Key? key, required this.catalog})
-      : assert(catalog != Null),
-        super(key: key);
 
+  const HomeDetailPage({Key? key, required this.catalog})
+      : assert(catalog != null),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent),
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
           children: [
             "\$${catalog.price}".text.bold.xl4.red800.make(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    MyTheme.darkBluishColor,
-                  ),
-                  shape: MaterialStateProperty.all(
-                    StadiumBorder(),
-                  )),
-              child: "Add to cart".text.make(),
+            AddToCart(
+              catalog: catalog,
+              key: Key(''),
             ).wh(120, 50)
           ],
         ).p32(),
@@ -41,26 +35,26 @@ class HomeDetailpage extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-                    tag: Key(catalog.id.toString()),
-                    child: Image.network(catalog.image))
-                .h32(context),
+              tag: Key(catalog.id.toString()),
+              child: Image.network(catalog.image),
+            ).h32(context),
             Expanded(
                 child: VxArc(
               height: 30.0,
               arcType: VxArcType.CONVEY,
               edge: VxEdge.TOP,
               child: Container(
-                color: Colors.white,
+                color: context.cardColor,
                 width: context.screenWidth,
                 child: Column(
                   children: [
                     catalog.name.text.xl4
-                        .color(MyTheme.darkBluishColor)
+                        .color(context.accentColor)
                         .bold
                         .make(),
                     catalog.desc.text.textStyle(context.captionStyle).xl.make(),
                     10.heightBox,
-                    "Elitr voluptua eos sanctus nonumy duo dolor, takimata amet labore ipsum eos amet, lorem lorem duo dolores vero sadipscing, rebum."
+                    "Dolor sea takimata ipsum sea eirmod aliquyam est. Eos ipsum voluptua eirmod elitr, no dolor dolor amet eirmod dolor labore dolores magna. "
                         .text
                         .textStyle(context.captionStyle)
                         .make()
